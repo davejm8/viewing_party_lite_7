@@ -18,6 +18,5 @@ RSpec.describe 'new viewing party page' do
     visit "/users/#{@user_1.id}/movies/#{@movie.id}/viewing_parties/new"
 
     expect(page).to have_content("#{@movie.title}")
-    save_and_open_page
   end
 end

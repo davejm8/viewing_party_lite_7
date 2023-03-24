@@ -9,3 +9,10 @@
   <%= party.party_time.strftime("%I:%M:%S") %><br>
   <% end %><br><br>
   </div>
+
+<% @viewing_party_host.each do |party| %>
+ <img src=party.movie_info.image_url.jpg alt="Fight Club" width="300" height="250">
+ <%= party.movie_info.title %>
+ <%= party.party_date%>
+ <%= party.party_time.strftime("%I:%M:%S") %>
+<%end%>

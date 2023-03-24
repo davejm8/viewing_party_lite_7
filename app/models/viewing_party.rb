@@ -3,4 +3,9 @@ class ViewingParty < ApplicationRecord
 
   has_many :user_parties
   has_many :users, through: :user_parties
+
+  def movie_info
+    MovieFacade.get_movie(self.movie_id)
+    # binding.pry
+  end
 end
