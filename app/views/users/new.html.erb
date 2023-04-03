@@ -1,10 +1,14 @@
 <h1>Viewing Party</h1>
 <h3>Register a New User</h3>
 
-<%= form_with url: "/register", method: :post, local: true do |f|%>
+<%= form_with model: @users do |f|%>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :email %>
   <%= f.text_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation%>
   <%= f.submit "Create New User" %>
 <%end%>

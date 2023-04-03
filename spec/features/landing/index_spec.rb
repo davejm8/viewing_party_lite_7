@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'landing page' do
   before :each do
-    @user1 = User.create!(name: 'Bob', email: 'blahblah@blah.com')
-    @user2 = User.create!(name: 'Steve', email: 'steve@steve.com')
+    @user1 = User.create!(name: 'Bob', email: 'blahblah@blah.com', password: "test")
+    @user2 = User.create!(name: 'Steve', email: 'steve@steve.com', password: "test")
 
     @party1 = ViewingParty.create!(duration: 120, party_date: '2021-03-20', party_time: '12:00:00', movie_id: 1)
     @party2 = ViewingParty.create!(duration: 60, party_date: '2021-04-20', party_time: '09:00:00', movie_id: 2)

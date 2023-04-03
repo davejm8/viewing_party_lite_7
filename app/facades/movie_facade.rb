@@ -28,4 +28,11 @@ class MovieFacade
       Review.new(data)
     end
   end
+
+  def self.merchants_name
+    MovieService.conn[:data].map do |merchant|
+      info = merchant[:attributes]
+      Merchant.new(info)
+    end
+  end
 end
