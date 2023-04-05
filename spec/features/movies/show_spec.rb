@@ -45,6 +45,14 @@ RSpec.describe 'movies show page' do
     expect(page).to have_link("Create Viewing Party")
   end
 
+  it "fail to create a viewing party if the user is not login" do
+    visit "/users/#{@user_1.id}/movies/#{@movie.id}"
+
+    click_on("Create Viewing Party")
+    expect(current_path).to eq("/users/#{@user_1.id}/movies/#{@movie.id}")
+    expect(page).to have_content("You must be logged in or registered to create a movie party")
+  end
+
   it 'has the movie attributes' do
     visit "/users/#{@user_1.id}/movies/#{@movie.id}"
 

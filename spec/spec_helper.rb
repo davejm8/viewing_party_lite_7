@@ -97,4 +97,15 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+
+  def log_in
+    # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
+    visit root_path
+    click_on "Log In"
+
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+
+    click_on "Log In"
+  end
 end

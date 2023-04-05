@@ -22,6 +22,8 @@ RSpec.describe "User Dashboard" do
     @user_party_1 = UserParty.create!(user_id: @user_1.id, viewing_party_id: @viewing_party_1.id)
     @user_party_2 = UserParty.create!(user_id: @user_1.id, viewing_party_id: @viewing_party_2.id)
     @user_party_3 = UserParty.create!(user_id: @user_2.id, viewing_party_id: @viewing_party_2.id)
+    
+    log_in
 
     visit "users/#{@user_1.id}"
   end

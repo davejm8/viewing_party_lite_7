@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
-    @viewing_parties = @user.viewing_parties
-    @parties_info = []
-    @viewing_parties.each do |party|
-      @parties_info << party.get_data
+    if current_user.present?
+      @user = User.find(params[:id])
+      @viewing_parties = @user.viewing_parties
+      @parties_info = []
+      @viewing_parties.each do |party|
+        @parties_info << party.get_data
+      end
+    else
+      flash[:alert] = "You must be logged in or registered to access your dashboard"
+      redirect_to root_path
     end
   end
 
@@ -16,6 +21,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
+      session[:user_id] = user.id
       redirect_to "/users/#{user.id}"
     else
       flash[:alert] = user.errors.full_messages.join(", ")
@@ -31,11 +37,17 @@ class UsersController < ApplicationController
     user = User.find_by(email: params[:email])
 
     if user.authenticate(params[:password])
+      session[:user_id] = user.id
       redirect_to "/users/#{user.id}"
     else
       flash[:alert] = "Password Mismatch"
       render :login_form
     end
+  end
+
+  def logout_user
+    session[:user_id] = nil
+    redirect_to root_path
   end
 
   private

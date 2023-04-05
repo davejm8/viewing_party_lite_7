@@ -24,9 +24,14 @@ RSpec.describe 'landing page' do
     expect(current_path).to eq("/register")
   end
 
-  it 'has a list of users and their names are links to their show page' do
-    expect(page).to have_link(@user1.name)
-    expect(page).to have_link(@user2.name)
+  # it 'has a list of users and their names are links to their show page' do
+  #   expect(page).to have_link(@user1.name)
+  #   expect(page).to have_link(@user2.name)
+  # end
+
+  it 'has a list of users and their email' do
+    expect(page).to have_content(@user1.email)
+    expect(page).to have_content(@user2.email)
   end
 
   it 'has a link to go back to the landing page' do
@@ -36,4 +41,12 @@ RSpec.describe 'landing page' do
     
     expect(current_path).to eq("/")
   end
+
+  it "redirects to the landing page if user not logged in" do
+    visit "/users/#{@user1.id}"
+
+    expect(current_path).to eq("/")
+    expect(page).to have_content("You must be logged in or registered to access your dashboard")
+  end
+
 end

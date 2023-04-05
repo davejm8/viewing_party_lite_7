@@ -7,11 +7,13 @@ RSpec.describe 'new viewing party page' do
     @user_3 = create(:user)
     @user_4 = create(:user)
 
+    
     json_response = File.read('spec/fixtures/movie.json')
     stub_request(:get, "https://api.themoviedb.org/3/movie/238?api_key=#{ENV['MOVIE_DB_KEY']}")
-      .to_return(status: 200, body: json_response, headers: {})
-
+    .to_return(status: 200, body: json_response, headers: {})
+    
     @movie = Movie.new(JSON.parse(json_response, symbolize_names: true))
+    log_in
   end
 
   it 'displays the movie title' do
@@ -48,7 +50,6 @@ RSpec.describe 'new viewing party page' do
 
       click_button "Create Party"
     end
-
     expect(current_path).to eq("/users/#{@user_1.id}")
   end
 end
